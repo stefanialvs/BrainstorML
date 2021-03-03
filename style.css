@@ -1,0 +1,72 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+@font-face {
+  font-family: PoppinsRegular;
+  src: url(assets/font/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: PoppinsSemiBold;
+  src: url(assets/font/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: PoppinsExtraBold;
+  src: url(assets/font/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: PoppinsLight;
+  src: url(assets/font/Poppins-Light.ttf);
+}
+
+  
+.h1 {
+  font-family: PoppinsExtraBold;
+  color: #2B7BC5;
+  cursor: pointer;
+}
+  
+p {
+  font-family: PoppinsSemiBold;
+  color: rgb(44, 44, 44);
+}
+
+.p1 {
+  font-family: PoppinsLight;
+  font-size: 22px;
+  color: rgb(44, 44, 44);
+}
+
+img{
+  display: block;
+  padding-left: 27%;
+  top: 10%;
+  position: absolute;
+}
+
+.button {
+  background-color: #2B7BC5;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-family: PoppinsRegular;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #8D3C94;
+  color: white;
+}
+
