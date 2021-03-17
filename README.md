@@ -13,6 +13,7 @@ https://towardsdatascience.com/word-embedding-with-word2vec-and-fasttext-a209c1d
 ### Clustering
 Aprende a usar clustering viendo documentación
 https://scikit-learn.org/stable/modules/clustering.html
+https://medium.com/@aneesha/using-tsne-to-plot-a-subset-of-similar-words-from-word2vec-bb8eeaea6229
 
 ### Visualization and Usage
 Encontrar visualización fancy
