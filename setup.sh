@@ -9,3 +9,4 @@ conda install pytorch==1.4.0 -c pytorch
 conda install jupyterlab
 conda install jupyter
 conda install -c anaconda gensim
+conda install smart_open==2.0.0
