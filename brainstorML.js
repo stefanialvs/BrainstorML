@@ -1,48 +1,44 @@
-//==================================================
-//Declare Variables
-//==================================================
+//==================================================================
+// DECLARE VARIABLES
+//==================================================================
 
 //images
 let postImage;
 let postImageLength;
 let postIcon;
 let postMarker;
-let postButtonsJSON = {'grayPost':{'postX': 0, 'postY': 0,
+let postButtonsJSON = {'gray':{'postX': 0, 'postY': 0,
                         'path':'/images/posts/grayPost.png'},
-                       'yellowPost':{'postX': 0, 'postY': 1,
+                       'yellow':{'postX': 0, 'postY': 1,
                         'path':'/images/posts/yellowPost.png'},
-                       'canaryPost':{'postX': 0, 'postY': 2,
+                       'canary':{'postX': 0, 'postY': 2,
                         'path':'/images/posts/canaryPost.png'},
-                       'orangePost':{'postX': 0, 'postY': 3,
+                       'orange':{'postX': 0, 'postY': 3,
                         'path':'/images/posts/orangePost.png'},
-                       'greenPost':{'postX': 0, 'postY': 4,
+                       'green':{'postX': 0, 'postY': 4,
                         'path':'/images/posts/greenPost.png'},
-                       'frogPost':{'postX': 0, 'postY': 5,
+                       'frog':{'postX': 0, 'postY': 5,
                         'path':'/images/posts/frogPost.png'},
-                       'grassPost':{'postX': 0, 'postY': 6,
+                       'grass':{'postX': 0, 'postY': 6,
                         'path':'/images/posts/grassPost.png'},
-                       'aquaPost':{'postX': 0, 'postY': 7,
+                       'aqua':{'postX': 0, 'postY': 7,
                         'path':'/images/posts/aquaPost.png'},
-                       'bluePost':{'postX': 1, 'postY': 0,
+                       'blue':{'postX': 1, 'postY': 0,
                         'path':'/images/posts/bluePost.png'},
-                       'skyPost':{'postX': 1, 'postY': 1,
+                       'sky':{'postX': 1, 'postY': 1,
                         'path':'/images/posts/skyPost.png'},
-                       'navyPost':{'postX': 1, 'postY': 2,
+                       'navy':{'postX': 1, 'postY': 2,
                         'path':'/images/posts/navyPost.png'},
-                       'fiucsaPost':{'postX': 1, 'postY': 3,
+                       'fiucsa':{'postX': 1, 'postY': 3,
                         'path':'/images/posts/fiucsaPost.png'},
-                       'rosePost':{'postX': 1, 'postY': 4,
+                       'rose':{'postX': 1, 'postY': 4,
                         'path':'/images/posts/rosePost.png'},
-                       'pinkPost':{'postX': 1, 'postY': 5,
+                       'pink':{'postX': 1, 'postY': 5,
                         'path':'/images/posts/pinkPost.png'},
-                       'purplePost':{'postX': 1, 'postY': 6,
+                       'purple':{'postX': 1, 'postY': 6,
                         'path':'/images/posts/purplePost.png'},
-                       'charcoalPost':{'postX': 1, 'postY': 7,
+                       'charcoal':{'postX': 1, 'postY': 7,
                         'path':'/images/posts/charcoalPost.png'}};
-
-//buttons
-let tempButton;
-let postButton;
 
 //fonts
 let fontRegular;
@@ -52,9 +48,9 @@ let fontSemiBold;
 let posts = [];
 let ideasTable;
 
-//==================================================
-//Preload and Setup
-//==================================================
+//==================================================================
+// SETUP
+//==================================================================
 
 function preload(){
   //images
@@ -62,7 +58,8 @@ function preload(){
   postIcon = loadImage('images/post_icon.png');
   postMarker = loadImage('images/post_container.png');
   postImageLength = 130;
-    
+  postImagesJSON = preloadPostImages();
+  
   //fonts
   fontRegular = loadFont('/font/Poppins-Regular.ttf');
   fontSemiBold = loadFont('/font/Poppins-SemiBold.ttf');
@@ -70,14 +67,15 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  setupInput()
+  setupPostButtons();
+  setupTable();
+}
+
+function setupInput(){
   input = createInput();
   fill(255,255,255);
-  input.position(50, 50);
-  setupTable();
-  setupTempButton();
-  //setupPostButton();
-  setupPostButtons();
-  
+  input.position(50, 50);  
 }
 
 function setupTable(){
@@ -89,24 +87,9 @@ function setupTable(){
   console.log('setup table');
 }
 
-function setupTempButton() {
-  tempButton = createButton('Post it');
-  tempButton.position(210, 50);
-  tempButton.mousePressed(newPost);
-  console.log('setup temp button')
-}
-
-function setupPostButton() {
-  //postButton = createButton('Post Image')
-  postButton = createImg('/images/post_icon.png', 'post');
-  postButton.position(40, 80);
-  postButton.mousePressed(newPost);
-  console.log('setup post button')
-}
-
-
-//post color buttons
 function setupPostButtons() {
+  // loop through postButtonsJSON and parse it to create
+  // coloredPost buttons
   var postColors = Object.keys(postButtonsJSON);
   for (let i = 0; i < postColors.length; i++){
     let postColor = postColors[i];
@@ -115,22 +98,102 @@ function setupPostButtons() {
     let postY = postButtonsJSON[postColor].postY * 60 + 200;
     postButtonsJSON[postColor].button = createImg(postPath, postColor);
     postButtonsJSON[postColor].button.position(postX, postY);
+    
+    // Nasty hardcode
+    if (postColor =='gray') {
+      postButtonsJSON[postColor].button.mousePressed(newGrayPost);}
+    if (postColor =='yellow') {
+      postButtonsJSON[postColor].button.mousePressed(newYellowPost);}
+    if (postColor =='canary') {
+      postButtonsJSON[postColor].button.mousePressed(newCanaryPost);}
+    if (postColor =='orange') {
+      postButtonsJSON[postColor].button.mousePressed(newOrangePost);}
+    if (postColor =='green') {
+      postButtonsJSON[postColor].button.mousePressed(newGreenPost);}    
+    if (postColor =='frog') {
+      postButtonsJSON[postColor].button.mousePressed(newFrogPost);}
+    if (postColor =='grass') {
+      postButtonsJSON[postColor].button.mousePressed(newGrassPost);}
+    if (postColor =='aqua') {
+      postButtonsJSON[postColor].button.mousePressed(newAquaPost);}
+    if (postColor =='blue') {
+      postButtonsJSON[postColor].button.mousePressed(newBluePost);}
+    if (postColor =='sky') {
+      postButtonsJSON[postColor].button.mousePressed(newSkyPost);}
+    if (postColor =='navy') {
+      postButtonsJSON[postColor].button.mousePressed(newNavyPost);}
+    if (postColor =='fiucsa') {
+      postButtonsJSON[postColor].button.mousePressed(newFiucsaPost);}
+    if (postColor =='rose') {
+      postButtonsJSON[postColor].button.mousePressed(newRosePost);}
+    if (postColor =='pink') {
+      postButtonsJSON[postColor].button.mousePressed(newPinkPost);}
+    if (postColor =='purple') {
+      postButtonsJSON[postColor].button.mousePressed(newPurplePost);}
+    if (postColor =='charcoal') {
+      postButtonsJSON[postColor].button.mousePressed(newCharcoalPost);}
+    
+    //postButtonsJSON[postColor].button.mousePressed(newPost);
   }
+  console.log('setup colored post buttons')
 }
 
+function preloadPostImages(){
+  // preload coloredPost images for later use
+  let grayPostImage      = loadImage('/images/posts/grayPost.png');
+  let yellowPostImage    = loadImage('/images/posts/yellowPost.png');
+  let canaryPostImage    = loadImage('/images/posts/canaryPost.png');
+  let orangePostImage    = loadImage('/images/posts/orangePost.png');
+  let greenPostImage     = loadImage('/images/posts/greenPost.png');
+  let frogPostImage      = loadImage('/images/posts/frogPost.png');
+  let grassPostImage     = loadImage('/images/posts/grassPost.png');
+  let aquaPostImage      = loadImage('/images/posts/aquaPost.png');
+  let bluePostImage      = loadImage('/images/posts/bluePost.png');
+  let skyPostImage       = loadImage('/images/posts/skyPost.png');
+  let navyPostImage      = loadImage('/images/posts/navyPost.png');
+  let fiucsaPostImage    = loadImage('/images/posts/fiucsaPost.png');
+  let rosePostImage      = loadImage('/images/posts/rosePost.png');
+  let pinkPostImage      = loadImage('/images/posts/pinkPost.png');
+  let purplePostImage    = loadImage('/images/posts/purplePost.png');
+  let charcoalPostImage  = loadImage('/images/posts/charcoalPost.png');
+  
+  // Declare color Images for easy use
+  postImagesJSON = {'gray': grayPostImage,
+                    'yellow': yellowPostImage,
+                    'canary': canaryPostImage,
+                    'orange': orangePostImage,
+                    'green': greenPostImage,
+                    'frog': frogPostImage,
+                    'grass': grassPostImage,
+                    'aqua': aquaPostImage,
+                    'blue': bluePostImage,
+                    'sky': skyPostImage,
+                    'navy': navyPostImage,
+                    'fiucsa': fiucsaPostImage,
+                    'rose': rosePostImage,
+                    'pink': pinkPostImage,
+                    'purple': purplePostImage,
+                    'charcoal': charcoalPostImage};
 
+  console.log('preload colored post images');
+  return postImagesJSON;
+}
 
-//==================================================
-//Post class
-//==================================================
+//==================================================================
+// POST CLASS
+//==================================================================
 
 class Post {
-  constructor(idea) {
+  constructor(idea, postColor) {
     this.x = random(200,800);
     this.y = random(100, 700);
     this.idea = idea;
     this.ideaLength = textWidth(this.idea);
     this.isClicked = false;
+    
+    // Colored post image
+    this.postImage = postImagesJSON[postColor];
+    console.log('Constructur postColor', postColor);
     
     // Dragging variables
     this.offsetX = 0;
@@ -189,7 +252,7 @@ class Post {
     }
     
     //matching image and post center
-    image(postImage,this.x-postImageLength/2, 
+    image(this.postImage,this.x-postImageLength/2, 
           this.y-postImageLength/2,
           postImageLength,
           postImageLength);
@@ -206,14 +269,27 @@ class Post {
   }
 }
 
-//==================================================
-//Interactions
-//==================================================
+//==================================================================
+// INTERACTION FUNCTIONS
+//==================================================================
 
-function newPost() {
-  fill(255,255,255)
-  posts.push(new Post('hola'))
-} 
+// Colored post constructors
+function newYellowPost(){posts.push(new Post('hola', 'yellow'))}
+function newGrayPost(){posts.push(new Post('hola', 'gray'))}
+function newCanaryPost(){posts.push(new Post('hola', 'canary'))}
+function newOrangePost(){posts.push(new Post('hola', 'orange'))}
+function newGreenPost(){posts.push(new Post('hola', 'green'))}
+function newFrogPost(){posts.push(new Post('hola', 'frog'))}
+function newGrassPost(){posts.push(new Post('hola', 'grass'))}
+function newAquaPost(){posts.push(new Post('hola', 'aqua'))}
+function newBluePost(){posts.push(new Post('hola', 'blue'))}
+function newSkyPost(){posts.push(new Post('hola', 'sky'))}
+function newNavyPost(){posts.push(new Post('hola', 'navy'))}
+function newFiucsaPost(){posts.push(new Post('hola', 'fiucsa'))}
+function newRosePost(){posts.push(new Post('hola', 'rose'))}
+function newPinkPost(){posts.push(new Post('hola', 'pink'))}
+function newPurplePost(){posts.push(new Post('hola', 'purple'))}
+function newCharcoalPost(){posts.push(new Post('hola', 'charcoal'))}
 
 function ideas2Table(ideas){
   //Receives ideas list and saves ideas table in csv
@@ -223,9 +299,9 @@ function ideas2Table(ideas){
   } 
 }
 
-//==================================================
-//Mouse Pressed
-//==================================================
+//==================================================================
+// CLICKS
+//==================================================================
 
 function mousePressed() {
 	// Click post function
@@ -240,9 +316,9 @@ function mouseReleased() {
   }  
 }
 
-//==================================================
-//Draw
-//==================================================
+//==================================================================
+// DRAW
+//==================================================================
 
 function draw() {
   background(255)
@@ -254,3 +330,4 @@ function draw() {
     posts[i].display(mouseX, mouseY);
   }
 }
+
