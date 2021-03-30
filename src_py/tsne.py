@@ -2,8 +2,8 @@
 import os
 import time
 import numpy as np
+import pandas as pd
 
-from sklearn.datasets import load_digits
 from cuml.manifold import TSNE
 
 
@@ -38,7 +38,12 @@ print('embeddings.shape', embeddings.shape)
 tsne = TSNE(n_components=2, perplexity=50)
 X_hat = tsne.fit_transform(embeddings)
 
-np.savetxt(f'./src_py/data/tsne_glove.csv', X_hat)
-
 print("X_hat.shape", X_hat.shape)
 print(f"time {time.time()-start}")
+
+# Save dataframe
+tsne_df = pd.DataFrame({'word': words[:, 0], 
+                        'x': X_hat[:,0],
+                        'y': X_hat[:,1]})
+
+tsne_df.to_csv('./src_py/data/tsne_glove.csv', index=False)
