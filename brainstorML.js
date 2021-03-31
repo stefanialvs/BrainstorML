@@ -47,6 +47,7 @@ let fontSemiBold;
 //ideas
 let posts = [];
 let ideasTable;
+var database;
 
 //===========================================================================
 // PRELOAD AND SETUP
@@ -73,7 +74,7 @@ function setup() {
 function setupInput(){
   ideaField = createInput();
   ideaField.size(60);
-  ideaField.position(200, 50);
+  ideaField.position(1200, 1000);
   ideaField.changed(writePosts);
 }
 
@@ -186,7 +187,7 @@ function preloadPostImages(){
 class Post {
   constructor(postColor) {
     // Initialize position
-    this.x = random(200,1700);
+    this.x = random(200,800);
     this.y = random(100,700);
     
     // Idea and extras
@@ -250,7 +251,7 @@ class Post {
       // Set ideaField with Post values
       this.isDoubleClicked = true;
       ideaField.position(this.x-35, this.y-12);
-      console.log("Double CLICKED mouse");
+      //console.log("Double CLICKED mouse");
       console.log(ideaField.value());
       this.idea = ideaField.value();
     }
@@ -265,6 +266,8 @@ class Post {
     if ((distX < postImageLength/2) && (distY < postImageLength/2)) {
       // Set ideaField with Post values
       this.idea = ideaField.value();
+      ideaField.value("");
+      ideaField.position(1200, 1000);
     }
   }
   
@@ -295,6 +298,11 @@ class Post {
             this.y-((postImageLength/2)+10),
             postImageLength+20,
             postImageLength+20)
+    }
+      
+    //Input field (matching with Post)
+    if (this.dragging) {
+      ideaField.position(this.x-35, this.y-12);
     }
     
     // Idea within post
@@ -375,7 +383,7 @@ function doubleClicked() {
 //===========================================================================
 
 function draw() {
-  background('#f5f5f5')
+  background("#f5f5f5")
   for (let i = 0; i < posts.length; i++) {
     posts[i].display(mouseX, mouseY);
   }
