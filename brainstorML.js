@@ -47,6 +47,8 @@ let fontSemiBold;
 //ideas
 let posts = [];
 let ideasTable;
+
+//database
 var database;
 
 //===========================================================================
@@ -69,6 +71,8 @@ function setup() {
   setupInput()
   setupPostButtons();
   setupTable();
+  firebaseSetup();
+  groupPostsButton()
 }
 
 function setupInput(){
@@ -138,6 +142,13 @@ function setupPostButtons() {
   console.log('setup colored post buttons')
 }
 
+
+function groupPostsButton(){
+  groupButton = createButton('Group Posts');
+  groupButton.position(20,100);
+  groupButton.mousePressed(firebasePush);
+}
+
 function preloadPostImages(){
   // preload coloredPost images for later use
   let grayPostImage      = loadImage('assets/images/posts/grayPost.png');
@@ -178,7 +189,36 @@ function preloadPostImages(){
   console.log('preload colored post images');
   return postImagesJSON;
 }
+//===========================================================================
+// FIREBASE SETUP
+//===========================================================================
 
+function firebaseSetup(){
+  var config = {
+    apiKey: "AIzaSyCqJFkLRfA4FPxDundTL5xI5g7XJu178Hs",
+    authDomain: "brainstorml.firebaseapp.com",
+    databaseURL: "https://brainstorml-default-rtdb.firebaseio.com",
+    projectId: "brainstorml",
+    storageBucket: "brainstorml.appspot.com",
+    messagingSenderId: "970506238229",
+    appId: "1: 970506238229: Web: 30a2bd1c2ec8711885511c"
+  };
+  
+  firebase.initializeApp(config); 
+  database = firebase.database();
+  
+  var ref = database.ref('idea');
+}
+
+// Firebase connection test
+
+function firebasePush() {
+  var ref = database.ref();
+  ref.orderByChild("word").equalTo("architect").on("value", function(snapshot) {
+    console.log(snapshot.val())
+  });
+  console.log('llegue hasta aqui');
+}
 
 //===========================================================================
 // POST CLASS
@@ -267,6 +307,7 @@ class Post {
       // Set ideaField with Post values
       this.idea = ideaField.value();
       ideaField.value("");
+      // Resetting input position after enter
       ideaField.position(1200, 1000);
     }
   }
@@ -351,6 +392,7 @@ function writePosts(){
   for (let i = 0; i < posts.length; i++) {
       posts[i].writePost(mouseX, mouseY)
   }
+  ideaField.value("")
 }
 
 //===========================================================================
@@ -360,7 +402,7 @@ function writePosts(){
 function mousePressed() {
 	// Click post function
 	for (let i = 0; i < posts.length; i++) {
-		posts[i].clicked(mouseX, mouseY)
+		posts[i].clicked(mouseX, mouseY);
 	}
     //writePosts();
 }
@@ -378,6 +420,7 @@ function doubleClicked() {
   }
 }
 
+
 //===========================================================================
 // DRAW
 //===========================================================================
@@ -388,4 +431,3 @@ function draw() {
     posts[i].display(mouseX, mouseY);
   }
 }
-

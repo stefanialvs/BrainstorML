@@ -28,7 +28,6 @@ body {
   font-family: PoppinsLight;
   src: url(assets/font/Poppins-Light.ttf);
 }
-
   
 .h1 {
   font-family: PoppinsExtraBold;
@@ -63,6 +62,12 @@ img{
   font-family: PoppinsRegular;
   border-radius: 5px;
   cursor: pointer;
+}
+
+input[type="text"]
+{
+    background: transparent;
+    border: none;
 }
 
 .button:hover {
