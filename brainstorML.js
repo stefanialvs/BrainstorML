@@ -146,7 +146,7 @@ function setupPostButtons() {
 function groupPostsButton(){
   groupButton = createButton('Group Posts');
   groupButton.position(20,100);
-  groupButton.mousePressed(firebasePush);
+  groupButton.mousePressed(getXYs);
 }
 
 function preloadPostImages(){
@@ -189,8 +189,9 @@ function preloadPostImages(){
   console.log('preload colored post images');
   return postImagesJSON;
 }
+
 //===========================================================================
-// FIREBASE SETUP
+// FIREBASE UTILITY
 //===========================================================================
 
 function firebaseSetup(){
@@ -205,19 +206,40 @@ function firebaseSetup(){
   };
   
   firebase.initializeApp(config); 
-  database = firebase.database();
-  
-  var ref = database.ref('idea');
+  database = firebase.database();  
+  console.log('firebase setup');
 }
 
 // Firebase connection test
-
-function firebasePush() {
+function getXY(post) {
+  let w, x, y;
   var ref = database.ref();
-  ref.orderByChild("word").equalTo("architect").on("value", function(snapshot) {
-    console.log(snapshot.val())
-  });
-  console.log('llegue hasta aqui');
+  console.log("Entra");
+  ref.orderByChild("word").equalTo(post.idea).on("value", function(snapshot) {
+      // Looping the json queried from the firebase data
+      let jsonQuery = snapshot.val();
+      for (var key in jsonQuery) {
+        w = jsonQuery[key].word;
+        x = jsonQuery[key].x;
+        y = jsonQuery[key].y;
+        console.log("w, x, y", w, x, y)
+        
+        //reassigning x and y for the posts
+        post.x = x
+        post.y = y
+      }
+    }
+  );
+  return w, x, y
+}
+
+function getXYs(){
+  
+  for (let i = 0; i < posts.length; i++) {
+    console.log(posts[i].idea);
+    getXY(posts[i]);
+  }
+  console.log("Entra3");
 }
 
 //===========================================================================
@@ -247,6 +269,11 @@ class Post {
     this.offsetY = 0;
     this.dragging = false;
     this.rollover = false;
+    
+    //Post embed coordinates
+    this.xEmbed = this.x;
+    this.yEmbed = this.y;
+
   }
   
   //------------------------- Communication Utils -------------------------//
