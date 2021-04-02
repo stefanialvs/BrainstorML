@@ -146,7 +146,7 @@ function setupPostButtons() {
 function groupPostsButton(){
   groupButton = createButton('Group Posts');
   groupButton.position(20,100);
-  groupButton.mousePressed(getXYs);
+  groupButton.mousePressed(traslateEmbeds);
 }
 
 function preloadPostImages(){
@@ -190,10 +190,6 @@ function preloadPostImages(){
   return postImagesJSON;
 }
 
-//===========================================================================
-// FIREBASE UTILITY
-//===========================================================================
-
 function firebaseSetup(){
   var config = {
     apiKey: "AIzaSyCqJFkLRfA4FPxDundTL5xI5g7XJu178Hs",
@@ -208,38 +204,6 @@ function firebaseSetup(){
   firebase.initializeApp(config); 
   database = firebase.database();  
   console.log('firebase setup');
-}
-
-// Firebase connection test
-function getXY(post) {
-  let w, x, y;
-  var ref = database.ref();
-  console.log("Entra");
-  ref.orderByChild("word").equalTo(post.idea).on("value", function(snapshot) {
-      // Looping the json queried from the firebase data
-      let jsonQuery = snapshot.val();
-      for (var key in jsonQuery) {
-        w = jsonQuery[key].word;
-        x = jsonQuery[key].x;
-        y = jsonQuery[key].y;
-        console.log("w, x, y", w, x, y)
-        
-        //reassigning x and y for the posts
-        post.x = x
-        post.y = y
-      }
-    }
-  );
-  return w, x, y
-}
-
-function getXYs(){
-  
-  for (let i = 0; i < posts.length; i++) {
-    console.log(posts[i].idea);
-    getXY(posts[i]);
-  }
-  console.log("Entra3");
 }
 
 //===========================================================================
@@ -278,20 +242,30 @@ class Post {
   
   //------------------------- Communication Utils -------------------------//
   
-  idea2Table() {
-    let newRow = ideasTable.addRow();
-    newRow.setNum('id', ideasTable.getRowCount() - 1);
-    newRow.setNum('x', this.x);
-    newRow.setNum('y', this.y);
-    newRow.setNum('idea', this.idea);
-  }
-  
-  changeIdea() {
-    //TO DO: change idea
+  getEmbedXY() {
+    // Declare variables for query
+    // visibility (weird JS hierarchies)
+    let w, xEmbed, yEmbed;
+    var ref = database.ref();
+    let word = this.idea;
+    
+    //-------------------------- Firebase query -------------------------//
+    ref.orderByChild("word").equalTo(word).on("value", function(snapshot) {
+        // Looping the json queried from the firebase data
+        let jsonQuery = snapshot.val();
+        for (var key in jsonQuery) {
+          w = jsonQuery[key].word;
+          xEmbed = jsonQuery[key].x;
+          yEmbed = jsonQuery[key].y;
+        }
+      }
+    );
+    //reassigning xEmbed and yEmbed for the posts
+    this.xEmbed = xEmbed
+    this.yEmbed = yEmbed
   }
   
   //----------------------------- Click Utils -----------------------------//
-  
   clicked(px, py) {
 	let distX = abs(px - this.x);
 	let distY = abs(py - this.y);
@@ -417,9 +391,62 @@ function ideas2Table(ideas){
 function writePosts(){
   console.log(ideaField.value());
   for (let i = 0; i < posts.length; i++) {
-      posts[i].writePost(mouseX, mouseY)
+      // weird execution priorities
+      posts[i].writePost(mouseX, mouseY);
+      posts[i].getEmbedXY();
   }
-  ideaField.value("")
+  ideaField.value("");
+}
+
+// Firebase connection test
+function getEmbedRanges(){
+  // Initialize min maxs
+  let minXEmbed = 10000;
+  let minYEmbed = 10000;
+  let maxXEmbed = -10000;
+  let maxYEmbed = -10000;
+  // Loop embeds and assign min maxs
+  for (let i = 0; i < posts.length; i++) {
+    console.log(posts[i].yEmbed);
+    if (minXEmbed >= posts[i].xEmbed) {
+        minXEmbed = posts[i].xEmbed;
+    }
+    if (minYEmbed >= posts[i].yEmbed) {
+        minYEmbed = posts[i].yEmbed;
+    }    
+    if (maxXEmbed <= posts[i].xEmbed) {
+        maxXEmbed = posts[i].xEmbed;
+    }
+    if (maxYEmbed <= posts[i].yEmbed) {
+        maxYEmbed = posts[i].yEmbed;
+    }
+  }
+  // Return rangeX, rangeY list
+  let ranges = {'minX': minXEmbed,
+                'maxX': maxXEmbed,
+                'rangeX': maxXEmbed-minXEmbed,
+                'minY': minYEmbed,
+                'maxY': maxYEmbed,
+                'rangeY': maxYEmbed-minYEmbed};
+  return ranges;
+}
+
+function traslateEmbeds(){
+  let ranges;
+  ranges = getEmbedRanges();
+  console.log('rangeX', ranges.rangeX);
+  console.log('rangeY', ranges.rangeY);
+  
+  // Loop embeds and assign min maxs
+  for (let i = 0; i < posts.length; i++) {
+    console.log("antes posts[i].x, posts[i].y", posts[i].x, posts[i].y);
+    let traslatedX = posts[i].xEmbed - ((ranges.rangeX/2)+ranges.minX);
+    let traslatedY = posts[i].yEmbed - ((ranges.rangeY/2)+ranges.minY);
+    posts[i].x = (0.5*(1600-260))/ranges.rangeX * traslatedX + 1340;
+    posts[i].y = (0.5*(800-200))/ranges.rangeY * traslatedY + 300;
+    console.log("despues posts[i].x, posts[i].y", posts[i].x, posts[i].y);
+    console.log("traslatedX, traslatedY", traslatedX, traslatedY);
+  }
 }
 
 //===========================================================================
