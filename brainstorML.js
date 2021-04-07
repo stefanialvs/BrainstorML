@@ -144,9 +144,11 @@ function setupPostButtons() {
 
 
 function groupPostsButton(){
-  groupButton = createButton('Group Posts');
+  groupButton = createImg('assets/images/group_button.png');
+  groupButton.size(120, 40);
   groupButton.position(20,100);
   groupButton.mousePressed(traslateEmbeds);
+
 }
 
 function preloadPostImages(){
