@@ -68,7 +68,8 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  setupInput()
+  setupInput();
+  promptInput();
   setupPostButtons();
   setupTable();
   firebaseSetup();
@@ -80,6 +81,13 @@ function setupInput(){
   ideaField.size(60);
   ideaField.position(1200, 1000);
   ideaField.changed(writePosts);
+}
+
+function promptInput(){
+  promptField = createInput();
+  promptField.size(150);
+  promptField.position((windowWidth/2)-80, 40);
+  promptField.changed(inputPromptGo);
 }
 
 function setupTable(){
@@ -451,6 +459,11 @@ function traslateEmbeds(){
   }
 }
 
+//disssapears the prompt input
+function inputPromptGo(){
+  promptField.position(1000,2000)
+}
+
 //===========================================================================
 // CLICK EVENT FUNCTIONS
 //===========================================================================
@@ -486,4 +499,13 @@ function draw() {
   for (let i = 0; i < posts.length; i++) {
     posts[i].display(mouseX, mouseY);
   }
+  fill(44, 44, 44);
+  textSize(18);
+  textFont(fontRegular);
+  text("Brainstorming prompt", (windowWidth/2)-300, 20);
+
+  fill("#2B7BC5");
+  textSize(30);
+  textFont(fontSemiBold);
+  text(promptField.value(), (windowWidth/2)-300, 80);
 }

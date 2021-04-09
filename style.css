@@ -67,7 +67,7 @@ img{
 input[type="text"]
 {
     background: transparent;
-    border: none;
+    border: "black";
 }
 
 .button:hover {
