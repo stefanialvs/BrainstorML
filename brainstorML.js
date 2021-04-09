@@ -363,8 +363,8 @@ class Post {
     
     fill(0);
     textFont(fontRegular);
-    textSize(15);
-    text(this.idea, this.x-35, this.y+4, 10);
+    textSize(13);
+    text(this.idea, this.x-40, this.y+4, 10);
   }
 }
 
