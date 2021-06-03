@@ -1,11 +1,22 @@
 /* This file intentionally left blank. */
 
+
+
+.wy-nav-content {
+    background-color: #ffffff; 
+}
+
+.wy-nav-content-wrap {
+    background-color: #ffffff;
+}
+
+
 .wy-side-nav-search, .wy-nav-top {
     background: #21124E;
 }
 
 .wy-nav-side {
-    background: #21124E;
+    background: #3b2874;
 }
 
 @font-face {
@@ -30,11 +41,47 @@ p {
 }
 
 h1 {
-    font-family: PoppinsExtraBold_headers;
-    color: #21124E;
+    font-family: NeueHaas_body;
+    text-transform: uppercase;
+    color: #335bdf;
 }
 
 h2 {
-    font-family: PoppinsSemiBold_headers;
-    color: #21124E;
+    font-family: NeueHaas_body;
+    text-transform: uppercase;
+    color: #335bdf;
 }
+
+.wy-menu-vertical a {
+    line-height: 18px;
+    padding: .4045em 1.618em;
+    display: block;
+    position: relative;
+    font-size: 90%;
+    color: #ffffff;
+}
+
+
+/* Subheader text color and background when selected */
+.wy-menu-vertical li.current a {
+    color: #3b2874;
+    background-color: #eeeeee;
+    padding: .4045em 2.427em;
+}
+
+/* Header text color and background when selected */
+.wy-menu-vertical li.current>a, .wy-menu-vertical li.on a {
+    color: #3b2874;
+    font-weight: 700;
+    position: relative;
+    background: #f8cc52;
+    border: none;
+    padding: .4045em 1.618em;
+}
+
+/* Hover menu color */
+.wy-menu-vertical a:hover {
+    background-color: #6446bd;
+    cursor: pointer;
+}
+
