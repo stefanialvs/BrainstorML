@@ -7,3 +7,34 @@
 .wy-nav-side {
     background: #21124E;
 }
+
+@font-face {
+    font-family: NeueHaas_body;
+    src: url(css/fonts/NeueHaasUnica-Light.ttf);
+}
+  
+@font-face {
+    font-family: PoppinsExtraBold_headers;
+    src: url(css/fonts/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: PoppinsSemiBold_headers;
+    src: url(css/fonts/Poppins-SemiBold.ttf);
+}
+
+
+p {
+    font-family: NeueHaas_body;
+    color: rgb(44, 44, 44);
+}
+
+h1 {
+    font-family: PoppinsExtraBold_headers;
+    color: #21124E;
+}
+
+h2 {
+    font-family: PoppinsSemiBold_headers;
+    color: #21124E;
+}
