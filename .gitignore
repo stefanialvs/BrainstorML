@@ -23,7 +23,7 @@ __pycache__/
 .Python
 src_py/data/
 env/
-build/
+#build/
 develop-eggs/
 dist/
 downloads/
