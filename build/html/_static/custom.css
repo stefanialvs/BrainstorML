@@ -1,1 +1,9 @@
 /* This file intentionally left blank. */
+
+.wy-side-nav-search, .wy-nav-top {
+    background: #21124E;
+}
+
+.wy-nav-side {
+    background: #21124E;
+}
