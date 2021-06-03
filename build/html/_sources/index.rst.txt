@@ -12,7 +12,7 @@ Description
 Web app that allows for automatic clustering and generation of ideas based on word embeddings, 
 using Natural Language Processing models.
 
-.. image:: BrainstorML/assets/documentation/Home.png
+.. image:: _static/documentation/Home.png
    :width: 100%
    :alt: BrainstorML Screenshot
 
