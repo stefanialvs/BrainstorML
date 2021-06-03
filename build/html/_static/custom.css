@@ -1,20 +1,22 @@
 /* This file intentionally left blank. */
 
 
-
+/* Background color */
 .wy-nav-content {
     background-color: #ffffff; 
 }
 
+/* Margin color */
 .wy-nav-content-wrap {
     background-color: #ffffff;
 }
 
-
+/* Left menu top section color */
 .wy-side-nav-search, .wy-nav-top {
     background: #21124E;
 }
 
+/* Left menu bottom section color */
 .wy-nav-side {
     background: #3b2874;
 }
@@ -52,6 +54,7 @@ h2 {
     color: #335bdf;
 }
 
+/* Left menu text attributes */
 .wy-menu-vertical a {
     line-height: 18px;
     padding: .4045em 1.618em;
@@ -60,7 +63,6 @@ h2 {
     font-size: 90%;
     color: #ffffff;
 }
-
 
 /* Subheader text color and background when selected */
 .wy-menu-vertical li.current a {
@@ -85,3 +87,9 @@ h2 {
     cursor: pointer;
 }
 
+/* Breadcrumbs color */
+.wy-breadcrumbs li a {
+    display: inline-block;
+    padding: 5px;
+    color: #F39322;
+}
