@@ -3,13 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-BrainstorML Documentation!!
+BrainstorML
 =======================================
+Welcome to the BrainstorML documentation page.
+
+Description
+---------
+Web app that allows for automatic clustering and generation of ideas based on word embeddings, 
+using Natural Language Processing models.
+
+.. image:: assets/documentation/Home.png
+   :width: 100%
+   :alt: BrainstorML Screenshot
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
+   :caption: Overview:
 
 
 Indices and tables
