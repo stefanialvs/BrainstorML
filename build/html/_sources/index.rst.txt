@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-BrainstorML
+Welcome
 =======================================
 Welcome to the BrainstorML documentation page.
 
@@ -17,8 +17,20 @@ using Natural Language Processing models.
    :alt: BrainstorML Screenshot
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Overview:
+   :caption: Overview
+   
+   about
+   model_pipeline
+   
+   
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Dataset
+   
+   dataset
 
 
 Indices and tables
