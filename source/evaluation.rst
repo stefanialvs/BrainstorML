@@ -37,6 +37,10 @@ For this question, they said that having overarching categories in the groups wo
 They mentioned that it would be for the initial stages of ideation. 
 Even sorting it with a margin of error was enough to start finding patterns in the information, which would reduce the cognitive load of doing this by hand. Additionally that it saves them time to do this by hand from the beginning.
 
+.. image:: build/html/_static/documentation/Interface_test_groups_cleaned.jpg
+   :scale: 100%
+   :alt: Doctor Gender Role example
+
 Insights
 **********
 
