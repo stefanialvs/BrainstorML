@@ -21,10 +21,10 @@ I must admit that I am not aware of what are the texts that build this corpus.
 They could be any type of literature and writings, like websites, articles, books, blogs, news, or maybe all of them combined. 
 This may cause several defaulted assumptions from the texts that don’t follow current ethical standards, like gender bias roles.
 
-.. image:: _static/documentation/doctor.png
+.. image:: build/html/_static/documentation/doctor.png
    :scale: 100%
    :alt: Doctor Gender Role example
    
-.. image:: _static/documentation/engineer.png
+.. image:: build/html/_static/documentation/engineer.png
    :scale: 100%
    :alt: Engineer Gender Role example

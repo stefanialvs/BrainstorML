@@ -42,17 +42,12 @@ p {
     color: rgb(44, 44, 44);
 }
 
-h1 {
+h1, h2, h3 {
     font-family: NeueHaas_body;
     text-transform: uppercase;
     color: #8c33df;
 }
 
-h2 {
-    font-family: NeueHaas_body;
-    text-transform: uppercase;
-    color: #8c33df;
-}
 
 /* Left menu text attributes */
 .wy-menu-vertical a {
