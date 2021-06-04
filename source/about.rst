@@ -20,4 +20,6 @@ Thinking, of course, the AI integration with this method could enhance their sen
 
 *"In design practice, affinity diagrams are used to analyze a design problem or create first design solutions. With a given design problem in mind, designers write down words, short sentences or make small sketches on sticky notes to stimulate diversity in ideation phases. Ideas are then clustered to identify common issues and potential solutions" (Lucero, 2015).*
 
-![Affinity Mapping process](https://github.com/stefanialvs/BrainstorML/blob/main/build/html/_static/documentation/Affinity_steps.png)
+.. image:: build/html/_static/documentation/Affinity_steps.png
+   :scale: 50%
+   :alt: Affinity Mapping process
