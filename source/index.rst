@@ -17,17 +17,20 @@ using Natural Language Processing models.
    :alt: BrainstorML Screenshot
 
 .. toctree::
+   :hidden:
    :maxdepth: 2
-   :caption: Description
+   :caption: Overview
    
    about
    model_pipeline
+   
    
 .. toctree::
    :hidden:
    :maxdepth: 2
    :caption: Dataset
-   :name: dataset
+   
+   dataset
 
 
 Indices and tables
