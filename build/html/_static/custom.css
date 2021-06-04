@@ -45,13 +45,13 @@ p {
 h1 {
     font-family: NeueHaas_body;
     text-transform: uppercase;
-    color: #335bdf;
+    color: #8c33df;
 }
 
 h2 {
     font-family: NeueHaas_body;
     text-transform: uppercase;
-    color: #335bdf;
+    color: #8c33df;
 }
 
 /* Left menu text attributes */
@@ -92,4 +92,17 @@ h2 {
     display: inline-block;
     padding: 5px;
     color: #F39322;
+}
+
+/* Menu headers settings*/
+.wy-menu-vertical header, .wy-menu-vertical p.caption {
+    color: #db9276;
+    line-height: 32px;
+    padding: 0 1.618em;
+    margin: 12px 0 0;
+    display: block;
+    text-transform: uppercase;
+    font-family: PoppinsSemiBold_headers;
+    font-size: 100%;
+    white-space: nowrap;
 }
