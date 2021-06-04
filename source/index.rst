@@ -18,7 +18,16 @@ using Natural Language Processing models.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Overview:
+   :caption: Description
+   
+   about
+   model_pipeline
+   
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Dataset
+   :name: dataset
 
 
 Indices and tables
