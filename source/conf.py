@@ -48,7 +48,7 @@ exclude_patterns = []
 
 html_theme = 'sphinx_rtd_theme'
 
-html_logo='_static/documentation/BrainstorML_logo.png'
+html_logo='/documentation/BrainstorML_logo.png'
 
 html_css_files = [
     "css/custom.css",
